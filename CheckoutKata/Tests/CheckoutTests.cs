@@ -27,5 +27,24 @@ namespace CheckoutKata.Tests
             //Assert
             Assert.AreEqual(50, result);
         }
+
+        [Test]
+        public void ScanningMultipleSkuReturnsCorrectTotalPrice()
+        {
+            //Arrange
+            var prices = new Dictionary<string, int>()
+            {
+                {"A", 50 },
+                {"B", 30 }
+            };
+            var checkout = new Checkout(prices);
+
+            //Act
+            checkout.Scan("A,B");
+            var result = checkout.GetTotalPrice();
+
+            //Assert
+            Assert.AreEqual(80, result);
+        }
     }
 }

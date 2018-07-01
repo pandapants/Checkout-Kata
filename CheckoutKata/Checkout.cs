@@ -6,13 +6,14 @@ namespace CheckoutKata.Tests
     internal class Checkout
     {
         int totalPrice;
-        string sku;
+        Dictionary<string, int> skuQuantities;
         Dictionary<string, int> _prices;
 
         public Checkout(Dictionary<string,int> prices)
         {
             totalPrice = 0;
             _prices = prices;
+            skuQuantities = new Dictionary<string, int>();
         }
 
         public Checkout()
@@ -20,17 +21,34 @@ namespace CheckoutKata.Tests
             totalPrice = 0;
         }
 
-        internal void Scan(string sku)
+        internal void Scan(string skuInput)
         {
-            this.sku = sku;
+            string[] splitSkuInput = skuInput.Split(',');
+
+            foreach(string sku in splitSkuInput)
+            {
+                if (skuQuantities.ContainsKey(sku))
+                {
+                    skuQuantities[sku] ++;
+                }
+                else
+                {
+                    skuQuantities[sku] = 1;
+                }
+            }
+            
         }
 
         internal int GetTotalPrice()
         {
-            if(_prices.ContainsKey(sku))
+            foreach(string sku in skuQuantities.Keys)
             {
-                totalPrice += _prices[sku];
+                if(_prices.ContainsKey(sku))
+                {
+                    totalPrice += _prices[sku];
+                }
             }
+
             return totalPrice;
         }
     }
