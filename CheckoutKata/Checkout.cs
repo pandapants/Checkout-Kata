@@ -20,6 +20,7 @@ namespace CheckoutKata.Tests
         internal object GetTotalPrice()
         {
             if (sku == "A") totalPrice += 50;
+            if (sku == "B") totalPrice += 30;
             return totalPrice;
         }
     }

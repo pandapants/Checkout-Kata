@@ -11,7 +11,7 @@ namespace CheckoutKata.Tests
     public class CheckoutTests
     {
         [Test]
-        public void ScanningSkuofAReturnsTotalPriceOf50()
+        public void ScanningSkuOfAReturnsTotalPriceOf50()
         {
             //Arrange
             var checkout = new Checkout();
@@ -22,6 +22,20 @@ namespace CheckoutKata.Tests
 
             //Assert
             Assert.AreEqual(50, result);
+        }
+
+        [Test]
+        public void ScanningSkuOfBReturnsTotalPriceOf30()
+        {
+            //Arrange
+            var checkout = new Checkout();
+
+            //Act
+            checkout.Scan("B");
+            var result = checkout.GetTotalPrice();
+
+            //Assert
+            Assert.AreEqual(30, result);
         }
     }
 }
