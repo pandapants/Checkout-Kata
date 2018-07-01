@@ -14,7 +14,11 @@ namespace CheckoutKata.Tests
         public void ScanningSkuOfAReturnsTotalPriceOf50()
         {
             //Arrange
-            var checkout = new Checkout();
+            var prices = new Dictionary<string, int>()
+            {
+                {"A", 50 }
+            };
+            var checkout = new Checkout(prices);
 
             //Act
             checkout.Scan("A");
@@ -28,7 +32,11 @@ namespace CheckoutKata.Tests
         public void ScanningSkuOfBReturnsTotalPriceOf30()
         {
             //Arrange
-            var checkout = new Checkout();
+            var prices = new Dictionary<string, int>()
+            {
+                {"B", 30 }
+            };
+            var checkout = new Checkout(prices);
 
             //Act
             checkout.Scan("B");

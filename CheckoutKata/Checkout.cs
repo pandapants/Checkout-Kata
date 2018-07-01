@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CheckoutKata.Tests
 {
@@ -6,6 +7,13 @@ namespace CheckoutKata.Tests
     {
         int totalPrice;
         string sku;
+        Dictionary<string, int> _prices;
+
+        public Checkout(Dictionary<string,int> prices)
+        {
+            totalPrice = 0;
+            _prices = prices;
+        }
 
         public Checkout()
         {
@@ -17,10 +25,12 @@ namespace CheckoutKata.Tests
             this.sku = sku;
         }
 
-        internal object GetTotalPrice()
+        internal int GetTotalPrice()
         {
-            if (sku == "A") totalPrice += 50;
-            if (sku == "B") totalPrice += 30;
+            if(_prices.ContainsKey(sku))
+            {
+                totalPrice += _prices[sku];
+            }
             return totalPrice;
         }
     }
