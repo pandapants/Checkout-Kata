@@ -43,7 +43,8 @@ namespace CheckoutKata.Tests
             {
                 if(_prices.ContainsKey(sku))
                 {
-                    totalPrice += _prices[sku];
+                    int skuQuantity = skuQuantities[sku];
+                    totalPrice += (skuQuantity * _prices[sku]);
                 }
             }
 

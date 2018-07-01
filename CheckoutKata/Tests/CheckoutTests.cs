@@ -40,11 +40,11 @@ namespace CheckoutKata.Tests
             var checkout = new Checkout(prices);
 
             //Act
-            checkout.Scan("A,B");
+            checkout.Scan("A,A,B");
             var result = checkout.GetTotalPrice();
 
             //Assert
-            Assert.AreEqual(80.50m, result);
+            Assert.AreEqual(130.50m, result);
         }
     }
 }
