@@ -11,7 +11,7 @@ namespace CheckoutKata.Tests
     public class CheckoutTests
     {
         [Test]
-        public void ScanningSkuOfAReturnsTotalPriceOf50()
+        public void ScanningSingleSkuReturnsCorrectTotalPrice()
         {
             //Arrange
             var prices = new Dictionary<string, int>()
@@ -26,24 +26,6 @@ namespace CheckoutKata.Tests
 
             //Assert
             Assert.AreEqual(50, result);
-        }
-
-        [Test]
-        public void ScanningSkuOfBReturnsTotalPriceOf30()
-        {
-            //Arrange
-            var prices = new Dictionary<string, int>()
-            {
-                {"B", 30 }
-            };
-            var checkout = new Checkout(prices);
-
-            //Act
-            checkout.Scan("B");
-            var result = checkout.GetTotalPrice();
-
-            //Assert
-            Assert.AreEqual(30, result);
         }
     }
 }
