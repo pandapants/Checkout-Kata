@@ -46,5 +46,23 @@ namespace CheckoutKata.Tests
             //Assert
             Assert.AreEqual(130.50m, result);
         }
+
+        [Test]
+        public void Scanning3SkuOfAReturnsDiscountedTotalPrice130()
+        {
+            //Arrange
+            var prices = new Dictionary<string, decimal>()
+            {
+                {"A", 50 }
+            };
+            var checkout = new Checkout(prices);
+
+            //Act
+            checkout.Scan("A,A,A");
+            var result = checkout.GetTotalPrice();
+
+            //Assert
+            Assert.AreEqual(130, result);
+        }
     }
 }
