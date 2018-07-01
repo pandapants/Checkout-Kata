@@ -24,19 +24,22 @@ namespace CheckoutKata.Tests
         internal void Scan(string skuInput)
         {
             string[] splitSkuInput = skuInput.Split(',');
+            this.UpdateSkuQuantities(splitSkuInput);
+        }
 
-            foreach(string sku in splitSkuInput)
+        private void UpdateSkuQuantities(string[] skuInputvalues)
+        {
+            foreach (string sku in skuInputvalues)
             {
                 if (skuQuantities.ContainsKey(sku))
                 {
-                    skuQuantities[sku] ++;
+                    skuQuantities[sku]++;
                 }
                 else
                 {
                     skuQuantities[sku] = 1;
                 }
             }
-            
         }
 
         internal int GetTotalPrice()
