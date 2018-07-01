@@ -5,6 +5,7 @@ namespace CheckoutKata.Tests
     internal class Checkout
     {
         int totalPrice;
+        string sku;
 
         public Checkout()
         {
@@ -13,11 +14,12 @@ namespace CheckoutKata.Tests
 
         internal void Scan(string sku)
         {
-            if (sku == "A") totalPrice += 50;
+            this.sku = sku;
         }
 
         internal object GetTotalPrice()
         {
+            if (sku == "A") totalPrice += 50;
             return totalPrice;
         }
     }
