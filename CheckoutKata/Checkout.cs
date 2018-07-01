@@ -3,25 +3,20 @@ using System.Collections.Generic;
 
 namespace CheckoutKata.Tests
 {
-    internal class Checkout
+    public class Checkout
     {
-        int totalPrice;
-        Dictionary<string, int> skuQuantities;
-        Dictionary<string, int> _prices;
+        private decimal totalPrice;
+        private Dictionary<string, int> skuQuantities;
+        private readonly Dictionary<string, decimal> _prices;
 
-        public Checkout(Dictionary<string,int> prices)
+        public Checkout(Dictionary<string, decimal> prices)
         {
             totalPrice = 0;
             _prices = prices;
             skuQuantities = new Dictionary<string, int>();
         }
 
-        public Checkout()
-        {
-            totalPrice = 0;
-        }
-
-        internal void Scan(string skuInput)
+        public void Scan(string skuInput)
         {
             string[] splitSkuInput = skuInput.Split(',');
             this.UpdateSkuQuantities(splitSkuInput);
@@ -42,7 +37,7 @@ namespace CheckoutKata.Tests
             }
         }
 
-        internal int GetTotalPrice()
+        public decimal GetTotalPrice()
         {
             foreach(string sku in skuQuantities.Keys)
             {

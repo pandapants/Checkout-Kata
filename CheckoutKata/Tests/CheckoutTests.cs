@@ -14,7 +14,7 @@ namespace CheckoutKata.Tests
         public void ScanningSingleSkuReturnsCorrectTotalPrice()
         {
             //Arrange
-            var prices = new Dictionary<string, int>()
+            var prices = new Dictionary<string, decimal>()
             {
                 {"A", 50 }
             };
@@ -32,10 +32,10 @@ namespace CheckoutKata.Tests
         public void ScanningMultipleSkuReturnsCorrectTotalPrice()
         {
             //Arrange
-            var prices = new Dictionary<string, int>()
+            var prices = new Dictionary<string, decimal>()
             {
                 {"A", 50 },
-                {"B", 30 }
+                {"B", 30.50m }
             };
             var checkout = new Checkout(prices);
 
@@ -44,7 +44,7 @@ namespace CheckoutKata.Tests
             var result = checkout.GetTotalPrice();
 
             //Assert
-            Assert.AreEqual(80, result);
+            Assert.AreEqual(80.50m, result);
         }
     }
 }
