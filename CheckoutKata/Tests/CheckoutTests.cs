@@ -14,11 +14,17 @@ namespace CheckoutKata.Tests
         public void ScanningSingleSkuReturnsCorrectTotalPrice()
         {
             //Arrange
-            var prices = new Dictionary<string, decimal>()
+            var priceInformation = new Dictionary<string, PriceInformation>()
             {
-                {"A", 50 }
+                {
+                    "A",
+                    new PriceInformation()
+                    {
+                        UnitPrice = 50.00m
+                    }
+                }
             };
-            var checkout = new Checkout(prices);
+            var checkout = new Checkout(priceInformation);
 
             //Act
             checkout.Scan("A");
@@ -32,12 +38,24 @@ namespace CheckoutKata.Tests
         public void ScanningMultipleSkuReturnsCorrectTotalPrice()
         {
             //Arrange
-            var prices = new Dictionary<string, decimal>()
+            var priceInformation = new Dictionary<string, PriceInformation>()
             {
-                {"A", 50 },
-                {"B", 30.50m }
+                {
+                    "A",
+                    new PriceInformation()
+                    {
+                        UnitPrice = 50.00m
+                    }
+                },
+                {
+                    "B",
+                    new PriceInformation()
+                    {
+                        UnitPrice = 30.50m
+                    }
+                }
             };
-            var checkout = new Checkout(prices);
+            var checkout = new Checkout(priceInformation);
 
             //Act
             checkout.Scan("A,A,B");
@@ -51,11 +69,22 @@ namespace CheckoutKata.Tests
         public void Scanning3SkuOfAReturnsDiscountedTotalPrice130()
         {
             //Arrange
-            var prices = new Dictionary<string, decimal>()
+            var priceInformation = new Dictionary<string, PriceInformation>()
             {
-                {"A", 50 }
+                {
+                    "A",
+                    new PriceInformation()
+                    {
+                        UnitPrice = 50.00m,
+                        MulitItemOffer = new MultipleItemOffer()
+                        {
+                            Quantity = 3,
+                            DiscountedPrice = 130
+                        }
+                    }
+                }
             };
-            var checkout = new Checkout(prices);
+            var checkout = new Checkout(priceInformation);
 
             //Act
             checkout.Scan("A,A,A");

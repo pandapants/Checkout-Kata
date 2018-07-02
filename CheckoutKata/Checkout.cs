@@ -7,12 +7,12 @@ namespace CheckoutKata.Tests
     {
         private decimal totalPrice;
         private Dictionary<string, int> skuQuantities;
-        private readonly Dictionary<string, decimal> _prices;
+        private readonly Dictionary<string, PriceInformation> _priceInformation;
 
-        public Checkout(Dictionary<string, decimal> prices)
+        public Checkout(Dictionary<string, PriceInformation> priceInformation)
         {
             totalPrice = 0;
-            _prices = prices;
+            _priceInformation = priceInformation;
             skuQuantities = new Dictionary<string, int>();
         }
 
@@ -39,24 +39,37 @@ namespace CheckoutKata.Tests
 
         public decimal GetTotalPrice()
         {
-            foreach(string sku in skuQuantities.Keys)
+            foreach (string sku in skuQuantities.Keys)
             {
-                if(_prices.ContainsKey(sku))
+                PriceInformation skuPriceInformation = _priceInformation[sku];
+
+                if (skuPriceInformation != null)
                 {
                     int skuQuantity = skuQuantities[sku];
 
-                    if (sku == "A" && skuQuantity == 3)
+                    if(MultipleItemDiscountApplies(skuPriceInformation, skuQuantity))
                     {
-                        totalPrice += 130;
+                        totalPrice += skuPriceInformation.MulitItemOffer.DiscountedPrice;
+                        totalPrice += (skuQuantity - skuPriceInformation.MulitItemOffer.Quantity) * skuPriceInformation.UnitPrice;
                     }
                     else
                     {
-                        totalPrice += (skuQuantity * _prices[sku]);
+                        totalPrice += (skuQuantity * skuPriceInformation.UnitPrice);
                     }
                 }
             }
 
             return totalPrice;
+        }
+
+        private bool MultipleItemDiscountApplies(PriceInformation skuPriceInformation, int skuQuantity)
+        {
+            if(skuPriceInformation.MulitItemOffer != null)
+            {
+                return skuQuantity >= skuPriceInformation.MulitItemOffer.Quantity;
+            }
+
+            return false;
         }
     }
 }
