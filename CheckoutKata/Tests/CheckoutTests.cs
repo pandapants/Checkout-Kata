@@ -87,11 +87,11 @@ namespace CheckoutKata.Tests
             var checkout = new Checkout(priceInformation);
 
             //Act
-            checkout.Scan("A,A,A");
+            checkout.Scan("A,A,A,A");
             var result = checkout.GetTotalPrice();
 
             //Assert
-            Assert.AreEqual(130, result);
+            Assert.AreEqual(180, result);
         }
     }
 }
