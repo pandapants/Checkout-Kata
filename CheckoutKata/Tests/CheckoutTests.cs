@@ -66,7 +66,7 @@ namespace CheckoutKata.Tests
         }
 
         [Test]
-        public void ScanningQuantityOfSkuMatchingOfferReturnsDiscountedTotalPrice()
+        public void MultipleItemOfferReturnsDiscountedTotalPrice()
         {
             //Arrange
             var priceInformation = new Dictionary<string, PriceInformation>()
